@@ -1,11 +1,13 @@
 (function() {
   'use strict';
 
-  const hourHandElem = document.querySelectorAll('.hour-hand')[0];
-  const minHandElem = document.querySelectorAll('.min-hand')[0];
-  const secondHandElem = document.querySelectorAll('.second-hand')[0];
+  const hourHandElem = document.querySelector('.hour-hand');
+  const minHandElem = document.querySelector('.min-hand');
+  const secondHandElem = document.querySelector('.second-hand');
 
-  setInterval(() => {
+  setInterval(_setTime, 1000);
+
+  function _setTime() {
     const time = new Date();
 
     const second = time.getSeconds();
@@ -20,11 +22,9 @@
     _rotate(secondHandElem, secondDegree);
     _rotate(minHandElem, minuteDegree);
     _rotate(hourHandElem, hourDegree);
-    
-  }, 1000);
+  }
 
   function _rotate(element, degree) {
     element.setAttribute('style', `transform: rotate(${degree + 90}deg)`);
   }
-
 })();
