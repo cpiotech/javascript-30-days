@@ -54,8 +54,8 @@
     // 5. Sort the inventors by years lived
 
     const yearsLivedSorted = inventors.sort((a, b) => {
-      let ya = a.passed - a.year;
-      let yb = b.passed - b.year;
+      const ya = a.passed - a.year;
+      const yb = b.passed - b.year;
       return (ya - yb);
     });
     console.table(yearsLivedSorted);
@@ -78,7 +78,6 @@
       const lastNameB = b.split(', ')[1];
       return (lastNameA > lastNameB) ? 1 : -1;
     });
-    
     console.log(nameSorted);
 
     // 8. Reduce Exercise
@@ -89,7 +88,6 @@
       (curr in acc) ? acc[curr] += 1 : acc[curr] = 1;
       return acc;
     }, {});
-
     console.log(res);
 
   </script>
