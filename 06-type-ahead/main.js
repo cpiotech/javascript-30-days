@@ -4,33 +4,51 @@
 
   const inputElem = document.querySelector('.search');
   const ulElem = document.querySelector('.suggestions');
-  
+
+  inputElem.addEventListener('input', handleInput);
+
+  const city = [];
   fetch(endpoint).then(res => {
     if (res.status === 200) {
       return res.json();
     }
-    // throw Error(res)
-    console.log(res);
+    throw new Error(res.statusText);
   }).then(data => {
-    init(data);
+    city.push(...data);
   }).catch(err => {
     console.log(err);
   });
 
-  function init(data) {
-    inputElem.addEventListener('input', (evt) => {
-      const value = evt.target.value
-      const filter = data.filter(d => d.city.toLowerCase().includes(value.toLowerCase()));
-      renderList(filter);
+  function numberWithCommas(x) {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+  }  
+
+  function filterData(data, value) {
+    return data.filter(d => {
+      const regex = new RegExp(value, 'gi');
+      return d.city.match(regex) || d.state.match(regex);
     });
   }
 
+  function handleInput(evt) {
+    const value = evt.target.value;
+    const filter = filterData(city, value);
+    renderList(filter, value);
+  }
 
-  function renderList(data) {
-    let html = '';
-    data.forEach(d => {
-      html += `<li>${d.city} <span class="population">${d.population}</span></li>`
-    });
+
+  function renderList(data, value) {
+    const html = data.map(d => {
+      const regex = new RegExp(value, 'gi');
+      const city = d.city.replace(regex, `<span class="hl">${value}</span>`);
+      const state = d.state.replace(regex, `<span class="hl">${value}</span>`);
+      return `
+        <li>
+          <span class="name">${city}, ${state}</span>
+          <span class="population">${numberWithCommas(d.population)}</span>
+        </li>
+      `;
+    }).join('');
     ulElem.innerHTML = html;
   }
 
