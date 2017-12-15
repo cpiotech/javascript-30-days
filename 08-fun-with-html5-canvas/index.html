@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>HTML5 Canvas</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.1/css/bulma.min.css">  
+</head>
+<body>
+<canvas id="draw" width="800" height="800"></canvas>
+<div class="buttons">
+  <a id="capture" class="button is-light">
+    <span class="icon">
+      <i class="fa fa-camera-retro" aria-hidden="true"></i>
+    </span>
+  </a>  
+  <button id="clear" class="button is-light">
+    <span class="icon">
+      <i class="fa fa-trash-o" aria-hidden="true"></i>
+    </span>
+  </button>
+</div>
+
+<script src="./main.js"></script>
+
+<style>
+  html, body {
+    margin:0;
+  }
+  #draw {
+    position: absolute;
+  }
+  .buttons {
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 10px;
+  }
+</style>
+
+</body>
+</html>
