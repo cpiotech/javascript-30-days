@@ -3,28 +3,17 @@
 
   const checkboxs = document.querySelectorAll('input[type="checkbox"]');
 
-  let keydown = false;
   let last = 0;
 
   checkboxs.forEach((checkbox, index) => {
-    checkbox.addEventListener('change', (evt) => checked.call(checkbox, index));
+    checkbox.addEventListener('click', (evt) => {
+      check.call(checkbox, evt, index)
+    });
   });
 
-  window.addEventListener('keydown', (evt) => {
-    if (evt.key === 'Shift') {
-      keydown = true;
-    }
-  });
-
-  window.addEventListener('keyup', (evt) => {
-    if (evt.key === 'Shift') {
-      keydown = false;
-    }
-  });
-
-  function checked(index) {
+  function check(evt, index) {
     const checked = this.checked;
-    if (keydown) {
+    if (evt.shiftKey) {
       for (let i = last; i < index; i++) {
         checkboxs[i].checked = checked;
       }
@@ -32,5 +21,5 @@
       last = index;
     }
   }
-
+  
 })();
