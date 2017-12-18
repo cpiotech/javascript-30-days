@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Key Detection</title>
+  <script type="text/javascript" src="http://www.cornify.com/js/cornify.js"></script>
+</head>
+<body>
+<script>
+(function(){
+  'use strict';
+  const pressed = [];
+  const match = [
+    "ArrowUp", 
+    "ArrowUp", 
+    "ArrowDown", 
+    "ArrowDown", 
+    "ArrowLeft", 
+    "ArrowLeft", 
+    "ArrowRight", 
+    "ArrowRight",
+    "Enter"
+  ];
+  window.addEventListener('keyup', (evt) => {
+    const key = evt.key;
+    pressed.push(key);
+    pressed.splice(-match.length - 1, pressed.length - match.length);
+    if (pressed.join('').includes(match.join(''))) {
+      cornify_add();
+    }
+  });
+})();
+</script>
+</body>
+</html>
