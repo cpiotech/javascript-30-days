@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>28 - Video Speed Controller</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="wrapper">
+    <video class="flex" width="765" height="430" src="http://clips.vorwaerts-gmbh.de/VfE_html5.mp4" loop controls></video>
+    <div class="speed">
+      <div class="speed-bar">1×</div>
+    </div>
+  </div>
+  <script>
+    (function() {
+      'use strict';
+      const DOM = {
+        video: document.querySelector('video'),
+        speed: document.querySelector('.speed'),
+        speedBar: document.querySelector('.speed-bar')
+      };
+
+      function handleMove(e) {
+        const y = e.pageY - this.offsetTop;
+        const percent = y / this.offsetHeight;
+        const min = 0.4;
+        const max = 4;
+        const height = Math.round(percent * 100) + '%';
+        const playbackRate = percent * (max - min) + min;
+        DOM.speedBar.style.height = height;
+        DOM.speedBar.textContent = playbackRate.toFixed(2) + '×';
+        DOM.video.playbackRate = playbackRate;
+      }
+
+      DOM.speed.addEventListener('mousemove', handleMove);
+    })();
+  </script>
+</body>
+</html>
